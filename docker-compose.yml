@@ -1,7 +1,6 @@
 version: '1'
 services:
   apache:
-    # image: php:8-apache
     container_name: apache
     build: .
     depends_on:
@@ -27,7 +26,14 @@ services:
       - "./db:/docker-entrypoint-initdb.d"
     networks:
       - myNetwork
-
+  
+  composer:
+    container_name: composer
+    image: composer:latest
+    tty: true 
+    command: install
+    volumes:  
+      - "./:/var/www/html"
   
 networks:
   myNetwork:
