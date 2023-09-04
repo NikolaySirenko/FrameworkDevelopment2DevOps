@@ -3,6 +3,7 @@ services:
   apache:
     container_name: apache
     build: .
+    restart: unless-stopped
     depends_on:
       - mysql
     volumes:  
@@ -15,7 +16,9 @@ services:
   mysql:
     container_name: mysql
     image: mysql:latest
+    restart: unless-stopped
     environment:
+      TZ: "Europe/Amsterdam"
       MYSQL_DATABASE: mysql
       MYSQL_ALLOW_EMPTY_PASSWORDS: 1
       MYSQL_ROOT_PASSWORD: qwerty123
