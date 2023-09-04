@@ -5,7 +5,7 @@ services:
         build: .
         restart: unless-stopped
         depends_on:
-            - mysql
+            - database
         volumes:  
             - "./:/var/www/html"
         ports:
@@ -13,16 +13,20 @@ services:
         networks:
             - myNetwork
 
-    mysql:
-        container_name: mysql
+    database:
+        container_name: database
         image: mysql:latest
         restart: unless-stopped
         environment:
-            TZ: "Europe/Amsterdam"
-            MYSQL_DATABASE: mysql
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USERNAME: ${DB_USERNAME}
+
             MYSQL_ALLOW_EMPTY_PASSWORDS: 1
-            MYSQL_ROOT_PASSWORD: qwerty123
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+            TZ: ${TIME_ZONE}
             B_STRICT: false
+
         ports:
             - 3306:3306
         volumes:

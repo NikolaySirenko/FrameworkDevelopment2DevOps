@@ -1,9 +1,17 @@
+full reset:
+	@make full remove
+	@make setup+data
+
 setup+data:
 	@make setup
 	@make data
 setup:
 	@make build
 	@make up 
+
+full remove:
+	docker compose rm -fsv
+	docker image prune -af
 
 build:
 	docker-compose build --no-cache --force-rm
