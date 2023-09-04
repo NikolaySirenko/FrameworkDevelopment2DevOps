@@ -6,13 +6,21 @@ WORKDIR /var/www/html
 
 # Install system dependencies and PHP extensions required by Laravel
 RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    libmariadb-dev \
+    zlib1g-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libjpeg62-turbo-dev \
     zip \
     unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+    && docker-php-ext-install gd pdo pdo_mysql 
+
+# Composer 
+# Requires substitution with a separate container via Docker Compose
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Enable Apache's rewrite module
 RUN a2enmod rewrite

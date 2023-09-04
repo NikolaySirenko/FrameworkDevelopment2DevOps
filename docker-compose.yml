@@ -1,19 +1,8 @@
 version: '1'
 services:
-  mysql:
-    image: mysql:latest
-    environment:
-      MYSQL_DATABASE: mysql
-      MYSQL_ALLOW_EMPTY_PASSWORDS: 1
-      MYSQL_ROOT_PASSWORD: qwerty123
-    ports:
-      - 3306:3306
-    volumes:
-      - "./db:/docker-entrypoint-initdb.d"
-    networks:
-      - myNetwork
   apache:
     # image: php:8-apache
+    container_name: apache
     build: .
     depends_on:
       - mysql
@@ -23,6 +12,22 @@ services:
       - 80:80
     networks:
       - myNetwork
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: mysql
+      MYSQL_ALLOW_EMPTY_PASSWORDS: 1
+      MYSQL_ROOT_PASSWORD: qwerty123
+      DB_STRICT: false
+    ports:
+      - 3306:3306
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+    networks:
+      - myNetwork
+
   
 networks:
   myNetwork:
