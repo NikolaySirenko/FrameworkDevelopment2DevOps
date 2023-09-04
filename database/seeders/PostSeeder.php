@@ -20,8 +20,9 @@ class PostSeeder extends Seeder
             Madrid, Spain's dynamic capital, is a cultural hub filled with art, history, and bustling urban 
             life. The city is home to world-class museums like the Prado and historic plazas. The Royal 
             Palace and its cuisine, nightlife, festivals, and two renowned football clubs, Real Madrid and 
-            Atlético, add to its charm.
-            ",
+            Atlético, add to its charm.",
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('posts')->insert([
@@ -30,8 +31,9 @@ class PostSeeder extends Seeder
             Barcelona, Spain's coastal gem, is a harmonious blend of history and modernity. The city 
             boasts iconic architecture by Antoni Gaudí, such as the Sagrada Família and Park Güell. Its 
             historic neighborhoods like the Gothic Quarter coexist with contemporary culture. Barcelona 
-            offers exquisite cuisine, beautiful beaches, lively festivals, and the iconic FC Barcelona.
-            ",
+            offers exquisite cuisine, beautiful beaches, lively festivals, and the iconic FC Barcelona.",
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('posts')->insert([
@@ -41,8 +43,9 @@ class PostSeeder extends Seeder
             City of Arts and Sciences coexists seamlessly with the Cathedral and La Lonja de la Seda. 
             Valencia is celebrated for its iconic paella, beautiful beaches like Malvarrosa, and the vibrant 
             Las Fallas festival. It effortlessly blends modern attractions, rich history, and Mediterranean 
-            allure.
-            ",
+            allure.",
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

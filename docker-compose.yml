@@ -30,7 +30,7 @@ services:
         ports:
             - 3306:3306
         volumes:
-            - "./db:/docker-entrypoint-initdb.d"
+            - db-data:/var/lib/mysql
         networks:
             - myNetwork
   
@@ -41,6 +41,8 @@ services:
         command: install
         volumes:  
             - "./:/var/www/html"
+volumes:
+    db-data: ~
   
 networks:
     myNetwork:

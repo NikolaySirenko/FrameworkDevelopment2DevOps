@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::latest('updated_at')->get();
         return view('posts', ['posts' => $posts]);
     }
 
