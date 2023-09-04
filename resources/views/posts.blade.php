@@ -11,6 +11,14 @@
     <main class="container">
         <h1>My Posts</h1>
 
+        <form method="POST" action="/posts">
+            @csrf
+            <label> New post </label>
+            <input type="text" placeholder="Title" name="title">
+            <input type="text" placeholder="Type your post text here..." name="content">
+            <input type="submit" value="Submit" />
+        </form>
+
         @foreach ($posts as $post)
             <article>
                 <h3>{{ $post->title }}</h3>
@@ -23,15 +31,6 @@
                 </form>
             </article>
         @endforeach
-
-
-        <form method="POST" action="/posts">
-            @csrf
-            <label> New post </label>
-            <input type="text" placeholder="Title" name="title">
-            <input type="text" placeholder="Type your post text here..." name="content">
-            <input type="submit" value="Submit" />
-        </form>
     </main>
 </body>
 </html>

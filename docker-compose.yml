@@ -1,43 +1,43 @@
 version: "3.8"
 services:
-  apache:
-    container_name: apache
-    build: .
-    restart: unless-stopped
-    depends_on:
-      - mysql
-    volumes:  
-      - "./:/var/www/html"
-    ports:
-      - 80:80
-    networks:
-      - myNetwork
+    apache:
+        container_name: apache
+        build: .
+        restart: unless-stopped
+        depends_on:
+            - mysql
+        volumes:  
+            - "./:/var/www/html"
+        ports:
+            - 80:80
+        networks:
+            - myNetwork
 
-  mysql:
-    container_name: mysql
-    image: mysql:latest
-    restart: unless-stopped
-    environment:
-      TZ: "Europe/Amsterdam"
-      MYSQL_DATABASE: mysql
-      MYSQL_ALLOW_EMPTY_PASSWORDS: 1
-      MYSQL_ROOT_PASSWORD: qwerty123
-      DB_STRICT: false
-    ports:
-      - 3306:3306
-    volumes:
-      - "./db:/docker-entrypoint-initdb.d"
-    networks:
-      - myNetwork
+    mysql:
+        container_name: mysql
+        image: mysql:latest
+        restart: unless-stopped
+        environment:
+            TZ: "Europe/Amsterdam"
+            MYSQL_DATABASE: mysql
+            MYSQL_ALLOW_EMPTY_PASSWORDS: 1
+            MYSQL_ROOT_PASSWORD: qwerty123
+            B_STRICT: false
+        ports:
+            - 3306:3306
+        volumes:
+            - "./db:/docker-entrypoint-initdb.d"
+        networks:
+            - myNetwork
   
-  composer:
-    container_name: composer
-    image: composer:latest
-    tty: true 
-    command: install
-    volumes:  
-      - "./:/var/www/html"
+    composer:
+        container_name: composer
+        image: composer:latest
+        tty: true 
+        command: install
+        volumes:  
+            - "./:/var/www/html"
   
 networks:
-  myNetwork:
-    driver: bridge
+    myNetwork:
+        driver: bridge
