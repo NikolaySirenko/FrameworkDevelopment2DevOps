@@ -3,7 +3,6 @@ services:
     apache:
         container_name: apache
         build: .
-        restart: unless-stopped
         depends_on:
             - database
         volumes:  
@@ -38,9 +37,11 @@ services:
         container_name: composer
         image: composer:latest
         tty: true 
-        command: install
+        command: 
+            bash -c "if [[ ! -f "vendor/autoload.php" ]]; then composer install --no-interaction; fi"
         volumes:  
             - "./:/var/www/html"
+
 volumes:
     db-data: ~
   

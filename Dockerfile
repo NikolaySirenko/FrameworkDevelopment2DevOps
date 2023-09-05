@@ -14,6 +14,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql 
 
+# Redis Installation
+#RUN pecl install -o -f redis \
+#    && rm -rf /tmp/pear \
+#    && docker-php-ext-enable redis
+
 # Enable Apache's rewrite module
 RUN a2enmod rewrite
 
@@ -30,5 +35,8 @@ COPY apache-laravel.conf /etc/apache2/sites-available/000-default.conf
 # Expose port 80 to the host machine
 EXPOSE 80
 
-# Start Apache server
-CMD ["apache2-foreground"]
+# Generate the .env file
+ENTRYPOINT [ "docker/entrypoint.sh" ]
+
+# Start Apache server (moved to docker/entrypoint.sh)
+# CMD ["apache2-foreground"]
