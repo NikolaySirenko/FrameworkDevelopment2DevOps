@@ -13,7 +13,7 @@ role=${CONTAINER_ROLE}
 
 if [ "$role" = "queue" ]; then
     echo "Running the queue ... "
-    php /var/www/artisan queue:work --verbose --tries=3 --timeout=180
+    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=180
 elif [ "$role" = "websocket" ]; then
     echo "Running the websocket server ... "
     php artisan websockets:serve
