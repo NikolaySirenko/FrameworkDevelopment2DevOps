@@ -35,7 +35,7 @@ COPY apache-laravel.conf /etc/apache2/sites-available/000-default.conf
 # Expose port 80 to the host machine
 EXPOSE 80
 
-# Generate the .env file and more
+# Generate the .env file
 ENTRYPOINT [ "docker/entrypoint.sh" ]
 
 # Start Apache server (moved to docker/entrypoint.sh)
