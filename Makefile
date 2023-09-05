@@ -1,28 +1,31 @@
 full-reset:
-	@make compose-stop
-	@make compose-removal
+	@make stop
+	@make full remove
+	@make setup+data
 
-	@make compose-buildup
-	
-	@make database-up
+setup+data:
+	@make setup
+	@make data
+setup:
+	@make build
+	@make up 
 
-compose-stop:
-	docker-compose stop
-compose-removal:
+full-remove:
 	docker compose rm -fsv
 	docker system prune -af --volumes
 	docker volume prune -af
 
-compose-buildup:
-	@make compose-build
-	@make compose-up 
-compose-build:
+build:
 	docker-compose build --no-cache --force-rm
-compose-up:
+up:
 	docker-compose up -d
+
+stop:
+	docker-compose stop
 	
-database-up:
-	docker exec apache bash -c "php artisan migrate --force"
-	docker exec apache bash -c "php artisan db:seed"	
-database-reset:
+data:
 	docker exec apache bash -c "php artisan migrate:reset"
+	docker exec apache bash -c "php artisan migrate --force"
+	docker exec apache bash -c "php artisan db:seed"
+	
+
